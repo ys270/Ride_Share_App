@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Main Page</title>
+</head>
+<body>
+  <h1>Main Page</h1>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="logout" style="font-size:100px">
+</form>
+  <li><a href="/app/request_ride">Request a Ride</a></li>
+  <li><a href="/app/join_ride">Join a Ride</a></li>
+  <li><a href="/app/register_as_driver/">Sign Up as a Driver</a></li>
+  <li><a href="/app/my_rides_as_owner">My Rides as the Owner</a></li>
+  <li><a href="/app/my_rides_as_sharer">My Rides as the Sharer</a></li>
+</body>
+</html>

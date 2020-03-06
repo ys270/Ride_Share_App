@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit driver information</title>
+</head>
+<body>
+  <h1>Edit Driver Information</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <li>Plate ID:<input type="text" name="plate_id" required="required"></li>
+    <li>Car Size:<select type="text" name="car_size">
+                    <option  value = "4">4</option>
+                    <option  value = "6">6</option>
+                    <option  value = "8">8</option>
+                </select></li>
+    <li>Do not want to be a driver anymore?:<select type="Boolean" name="is_driver">
+                            <option value = False>Yes</option>
+                            <option value = True>No</option>
+                        </select></li>
+    <input type="submit" value="Save Changes">
+</form>
+</body>
+</html>

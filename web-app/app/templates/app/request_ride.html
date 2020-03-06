@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request Ride</title>
+</head>
+<body>
+  <h1>Request Ride Page</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <li>Party Size:<input type="number" name="owner_party_size" min="1" max="8" required="required"></li>
+    <li>Car Size:<select type="text" name="car_seat">
+                    <option  value = "4">4</option>
+                    <option  value = "6">6</option>
+                    <option  value = "8">8</option>
+                </select></li>
+    <li>Sharable or Not:<select type="Boolean" name="is_sharable">
+                            <option value = True>Yes</option>
+                            <option value = False>No</option>
+                        </select></li>
+    <li>Destination:<input type="text" name="destination" required="required"></li>
+    <li>Arrival Time:<input type="datetime-local" name="arrival_time" required="required"></li>
+    <input type="submit" value="Request">
+</form>
+</body>
+</html>

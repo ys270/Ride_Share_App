@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>owner edit ride fail</title>
+</head>
+<h3>Either the car size you choose is smaller than your party size!</h3>
+<h3>Or the arrival time you choose is invalid (earlier than now)!!</h3>
+<h3>Please go back to choose again!!</h3>
+<br>
+<body>
+  <form action="" method="POST">
+  {% csrf_token %}
+    <input type="submit" value="return to main page">
+</form>
+</body>
+</html>

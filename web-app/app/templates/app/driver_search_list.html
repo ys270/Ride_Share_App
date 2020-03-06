@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit driver information</title>
+</head>
+<body>
+  <h1>Select One Ride</h1>
+  {% if ride_list %}
+<form action="/app/driver_search/" method="POST">
+    {% csrf_token %}
+    {% for ride in ride_list %}
+    <input type="radio" name="ride_pk" value="{{ride.pk}}" required="required"><br>
+    Ride Owner:{{ride.owner}}<br>
+    Destination:{{ride.destination}}<br>
+    Arrival Time:{{ride.arrival_time}}<br>
+    <br>
+    {% endfor %}
+    <input type="submit"  value="Choose">
+
+</form>
+{% else %}
+    <p>No rides are available.</p>
+{% endif %}
+
+</body>
+</html>

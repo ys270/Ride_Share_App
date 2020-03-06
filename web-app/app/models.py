@@ -1,0 +1,32 @@
+from django.contrib.postgres.fields import ArrayField
+from django.db import models
+from django.utils import timezone
+
+class Users(models.Model):
+        email = models.CharField(max_length=200)
+        password = models.CharField(max_length=200)
+        is_loggedin = models.BooleanField(default=False)
+        is_driver = models.BooleanField(default=False)
+        is_owner = models.BooleanField(default=True)
+        is_sharer = models.BooleanField(default=True)
+        car_size = models.IntegerField(default= 0)
+        plate_id = models.CharField(max_length=200,default='', null = True)
+        def __str__(self):
+                return self.email
+
+class Rides(models.Model):
+        owner = models.CharField(max_length=200)
+        owner_party_size = models.IntegerField(default= 0)
+        driver = models.CharField(max_length=200,blank=True,null=True)
+        car_seat = models.IntegerField(default=0)
+        sharer = ArrayField(models.CharField(max_length=200,blank = True, null = True), blank = True, null = True)
+        sharer_party_size = ArrayField(models.IntegerField(default= 0), blank = True, null = True)
+        is_sharable = models.BooleanField(default=True)
+        remaining_size = models.IntegerField(default= 0)
+        is_confirmed = models.BooleanField(default=False)
+        is_complete = models.BooleanField(default=False)
+        destination = models.CharField(max_length=200, blank = True, null = True)
+        arrival_time = models.DateTimeField(default= timezone.now)
+        def __str__(self):
+                return self.owner
+

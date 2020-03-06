@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Owned Open Rides</title>
+</head>
+<body>
+{% if ride %}
+  <h1>Current Info</h1>
+        <li>Ride Number:{{ride.pk}}</li>
+        <li>Owner Party Size:{{ride.owner_party_size}}</li>
+        <li>Ride Sharer:{{ride.sharer}}</li>
+        <li>Ride Sharer Party Size:{{ride.sharer_party_size}}</li>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+        {% if ride.is_sharable %}
+        <li>Is Sharerable:YES</li>
+        {% else %}
+        <li>Is Sharerable:NO</li>
+        {% endif %}
+        <li>Car Size:{{ride.car_seat}}</li>
+        <li>Remaining Size on Car:{{ride.remaining_size}}</li>
+        <br/>
+        {% if not ride.sharer %}
+        <h1> Edit Info </h1>
+        <form action="" method="POST">
+        {% csrf_token %}
+        <li>Party Size:<input type="number" name="owner_party_size" min="1" max="8" required="required"></li>
+        <li>Car Size:<select type="text" name="car_seat">
+                    <option  value = "4">4</option>
+                    <option  value = "6">6</option>
+                    <option  value = "8">8</option>
+                </select></li>
+        <li>Sharable or Not:<select type="Boolean" name="is_sharable">
+                            <option value = True>Yes</option>
+                            <option value = False>No</option>
+                        </select></li>
+        <li>Destination:<input type="text" name="destination" required="required"></li>
+        <li>Arrival Time:<input type="datetime-local" name="arrival_time" required="required"></li>
+            <input type="hidden" name="save_edit" value=True>
+         <input type="hidden" name="sharer" value={{sharer}}>
+        <input type="hidden" name="ride_pk" value={{ride.pk}}>
+        <input type="submit" value="Save Changes">
+        </form>
+        {% else %}
+        <h3> Your ride already have sharers, so you cannot edit it anymore!</h3>
+        {% endif %}
+{% else %}
+    <p>No such ride.</p>
+{% endif %}
+</body>
+</html>

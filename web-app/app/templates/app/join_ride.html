@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Search Open Rides</title>
+</head>
+<body>
+  <h1>Search Open Rides</h1>
+<form action="/app/select_sharer_ride/" method="POST">
+    {% csrf_token %}
+    <li>Earlist Arrival Time:<input type="datetime-local" name="earlist_arrival_time" required="required"></li>
+    <li>Latest Arrival Time:<input type="datetime-local" name="latest_arrival_time" required="required"></li>
+    <li>Destination:<input type="text" name="destination" required="required"></li>
+    <li>Party Size:<input type="number" name="sharer_party_size" min="1" max="7" required="required"></li>
+    <br>
+    <input type="submit" value="Search">
+</form>
+</body>
+</html>

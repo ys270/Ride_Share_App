@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Rides as Driver</title>
+</head>
+<body>
+  <h1>Select one Ride</h1>
+{% if ride_list %}
+<form action="/app/driver_ride_detail/" method="POST">
+    {% csrf_token %}
+    {% for ride in ride_list %}
+        <input type="radio" name="ride_pk" value="{{ride.pk}}" required="required"><br>
+        <li>Ride Owner:{{ride.owner}}</li>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+        <br/>
+    {% endfor %}
+    <input type="submit" value="Choose">
+</form>
+{% else %}
+    <p>You do not have rides now.</p>
+{% endif %}
+</body>
+</html>

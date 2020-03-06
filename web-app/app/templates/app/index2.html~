@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Main Page</title>
+</head>
+<body>
+  <h1>Main Page</h1>
+  <li><a href="/app/request_ride">Request a Ride</a></li>
+  <li><a href="/app/join_ride">Join a Ride</a></li>
+  <li><a href="/app/current_ride">Current Rides</a></li>
+  <li><a href="/app/driver_search/">Drive for a Ride</a></li>
+</body>
+</html>

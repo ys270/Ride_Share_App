@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Driver Ride Detail</title>
+</head>
+<body>
+{% if ride %}
+  <h1>My Owned confirmed Ride Detail</h1>
+        <li>Ride Number:{{ride.pk}}</li>
+        <li>My Party Size:{{ride.owner_party_size}}</li>
+        <li>Ride Sharer:{{ride.sharer}}</li>
+        <li>Ride Sharer Party Size:{{ride.sharer_party_size}}</li>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+        {% if ride.is_sharable %}
+        <li>Is Sharerable:YES</li>
+        {% else %}
+        <li>Is Sharerable:NO</li>
+        {% endif %}
+        <li>Car Size:{{ride.car_seat}}</li>
+        <li>Remaining Size on the Vehicle:{{ride.remaining_size}}</li>
+        <li>Car's Plate_ID:{{driver.plate_id}}</li>
+        <br/>
+{% else %}
+    <p>No such ride.</p>
+{% endif %}

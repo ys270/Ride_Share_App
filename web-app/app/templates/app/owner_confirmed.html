@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Owner Open </title>
+</head>
+<body>
+<h1>My Owned Confirmed Rides</h1>
+{% if ride_list %}
+<form action="/app/owner_confirmed_detail/" method="POST">
+    {% csrf_token %}
+     {% for ride in ride_list %}
+        <input type="radio" name="ride_pk" value="{{ride.pk}}" required="required"><br>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+        <li>Driver Email:{{ride.driver}}</li>
+        <li>Car Size:{{ride.car_seat}}</li>
+        <br/>
+    {% endfor %}
+    <input type="submit" value="Choose">
+</form>
+{% else %}
+    <p>No rides are available.</p>
+{% endif %}
+</body>
+</html>

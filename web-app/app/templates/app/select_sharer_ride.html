@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Select Sharer Ride</title>
+</head>
+<body>
+<h1>Select Sharer Ride</h1>
+{% if ride_list %}
+<form action="/app/select_sharer_ride/" method="POST">
+    {% csrf_token %}
+    <p> Choose One Ride To Join </p>
+     {% for ride in ride_list %}
+        <input type="radio" name="ride_pk" value="{{ride.pk}}" required="required"><br>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+        <li>Remaining Size:{{ride.remaining_size}}</li>
+        <br/>
+    <input type="hidden" name="ride_pk" value={{ride.pk}}>
+    {% endfor %}
+    <input type="hidden" name="sharer_party_size" value={{sharer_party_size}}>
+    <input type="hidden" name="choose_ride" value=True>
+    <input type="submit" value="Choose">
+</form>
+{% else %}
+    <p>There is no suitable open rides</p>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Driver Ride Detail</title>
+</head>
+<body>
+{% if ride %}
+  <h1>Driver Ride Detail</h1>
+        <li>Ride Number:{{ride.pk}}</li>
+        <li>Ride Owner:{{ride.owner}}</li>
+        <li>Owner Party Size:{{ride.owner_party_size}}</li>
+        <li>Ride Sharer:{{ride.sharer}}</li>
+        <li>Ride Sharer Party Size:{{ride.sharer_party_size}}</li>
+        <li>Destination:{{ride.destination}}</li>
+        <li>Arrival Time:{{ride.arrival_time}}</li>
+       {% if ride.is_sharable %}
+        <li>Is Sharerable:YES</li>
+        {% else %}
+        <li>Is Sharerable:NO</li>
+        {% endif %}
+        <li>Remaining Size on Car:{{ride.remaining_size}}</li>
+
+        <br/>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="is_complete" value=True>
+    <input type="hidden" name="ride_pk" value={{ride.pk}}>
+    <input type="submit" value="Complete this Ride">
+</form>
+{% else %}
+    <p>No such ride.</p>
+{% endif %}

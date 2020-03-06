@@ -1,0 +1,84 @@
+from django.shortcuts import render
+from .models import Users, Rides
+from django.http import HttpResponse
+from django.shortcuts import HttpResponseRedirect
+import hashlib
+
+def setPassword(password):
+    md5 = hashlib.md5()
+    md5.update(password.encode())
+    password = md5.hexdigest()
+    return str(password)
+
+def register(request):
+    if request.method=='POST':
+        data=request.POST
+        email=data.get("email")
+        password=data.get("password")
+        Users.objects.create(
+            email=email,
+            password=setPassword(password),
+        )
+        return HttpResponseRedirect('/app/login/')
+    return render(request,"app/register.html")
+
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get("email")
+        password = request.POST.get("password")
+        e = Users.objects.filter(email=email).first()
+        if e:
+            now_password=setPassword(password)
+            db_password = e.password
+            if now_password == db_password:
+                e.is_loggedin=True
+                e.save()
+                response = HttpResponseRedirect('/app/index/')
+                request.session["user_id"] = e.pk
+                return response
+            else:
+                return render(request, "app/login.html",{'hello': 'wrong password!'})
+        else:
+            return render(request, "app/login.html",{'hello': 'email not record!'})
+    return render(request, "app/login.html")
+
+def logout(request):
+    response=HttpResponseRedirect('app/login/')
+    del request.session["user_id"]
+    response.delete_cookie("username")
+    return response
+
+def index(request):
+    user_id = request.session["user_id"]
+    user = Users.objects.filter(pk=user_id).first()
+    if not user.is_driver:
+        return render(request,"app/index1.html")
+    else:
+        return render(request,"app/index2.html")
+
+def request_ride(request):
+    return HttpResponse("You are requesting rides!!!!!!")
+
+def join_ride(request):
+    return HttpResponse("You are joining rides!!!!!!")
+
+def current_ride(request):
+    return HttpResponse("You are at looking at your current ride!!!!!!")
+
+def register_as_driver(request):
+    user_id = request.session["user_id"]
+    user = Users.objects.filter(pk=user_id).first()
+    if request.method=='POST':
+        user.is_driver = True
+        data=request.POST
+        user.plate_id=data.get("plate_id")
+        user.car_size=int(data.get("car_size"))
+        if user.car_size>30 or user.car_size<4:
+            return render(request, "app/register_as_driver.html",{'message': 'car size should between 4 to 30!'})
+        user.save()
+        return HttpResponseRedirect('/app/index/')
+    return render(request, "app/register_as_driver.html")
+
+
+def driver_search(request):
+    return HttpResponse("You are searching rides!!!!!!")
