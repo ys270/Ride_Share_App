@@ -1,4 +1,4 @@
-Readme
+# How to use the web app
 
 
 First, go to http://vcm-xxxxx.vm.duke.edu:8000/app/login, because at first we do not have any users and rides, click on the sign up button and use a valid email address and the password you like to create a new user.
